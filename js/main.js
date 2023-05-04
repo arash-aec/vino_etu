@@ -12,9 +12,9 @@
 const BaseURL = document.baseURI;
 console.log(BaseURL);
 window.addEventListener('load', function() {
-    console.log("load");
+
+    // Probleme du bouton boire :
     document.querySelectorAll(".btnBoire").forEach(function(element){
-        console.log(element);
         element.addEventListener("click", function(evt){
             let id = evt.target.parentElement.dataset.id;
             let requete = new Request(BaseURL+"index.php?requete=boireBouteilleCellier", {method: 'POST', body: '{"id": '+id+'}'});
@@ -22,7 +22,10 @@ window.addEventListener('load', function() {
             fetch(requete)
             .then(response => {
                 if (response.status === 200) {
-                  return response.json();
+
+                  // Rechargement de page 
+                  location.reload();
+
                 } else {
                   throw new Error('Erreur');
                 }
@@ -36,16 +39,22 @@ window.addEventListener('load', function() {
 
     });
 
+
+    // Probleme ajout a rectifier
     document.querySelectorAll(".btnAjouter").forEach(function(element){
-        console.log(element);
+
         element.addEventListener("click", function(evt){
+          console.log('bug Ajout');
             let id = evt.target.parentElement.dataset.id;
             let requete = new Request(BaseURL+"index.php?requete=ajouterBouteilleCellier", {method: 'POST', body: '{"id": '+id+'}'});
 
             fetch(requete)
             .then(response => {
                 if (response.status === 200) {
-                  return response.json();
+
+                  // Rechargement de page 
+                  location.reload();
+
                 } else {
                   throw new Error('Erreur');
                 }
@@ -59,6 +68,8 @@ window.addEventListener('load', function() {
 
     });
    
+
+
     let inputNomBouteille = document.querySelector("[name='nom_bouteille']");
     console.log(inputNomBouteille);
     let liste = document.querySelector('.listeAutoComplete');
@@ -116,6 +127,8 @@ window.addEventListener('load', function() {
         }
       });
 
+
+      // Ajout de bouteille dans le cellier
       let btnAjouter = document.querySelector("[name='ajouterBouteilleCellier']");
       if(btnAjouter){
         btnAjouter.addEventListener("click", function(evt){
@@ -132,6 +145,8 @@ window.addEventListener('load', function() {
             fetch(requete)
                 .then(response => {
                     if (response.status === 200) {
+                      console.log("bouteille ajoutée")
+                      window.location.replace(BaseURL)
                       return response.json();
                     } else {
                       throw new Error('Erreur');

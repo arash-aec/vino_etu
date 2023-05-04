@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
-<html>
-	
+<html>	
 	<head>
 		<meta charset="UTF-8" />	
 	</head>
@@ -19,10 +18,6 @@
 		echo "importation : ". $nombre. "<br>";
 	
 	}
-	
-	
-	
-
 ?>
 </body>
 </html>
