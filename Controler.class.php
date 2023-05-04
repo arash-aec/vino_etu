@@ -74,6 +74,7 @@ class Controler
             echo json_encode($listeBouteille);
                   
 		}
+
 		private function ajouterNouvelleBouteilleCellier()
 		{
 			$body = json_decode(file_get_contents('php://input'));
@@ -90,9 +91,7 @@ class Controler
 				include("vues/entete.php");
 				include("vues/ajouter.php");
 				include("vues/pied.php");
-			}
-			
-            
+			}    
 		}
 		
 		private function boireBouteilleCellier()
