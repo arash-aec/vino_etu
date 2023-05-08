@@ -33,7 +33,7 @@ class Bouteille extends Modele {
 	{
 		
 		$rows = Array();
-		$requete ='SELECT 
+		$requete =	'SELECT 
 						c.id as id_bouteille_cellier,
 						c.id_bouteille, 
 						c.date_achat, 
@@ -44,7 +44,7 @@ class Bouteille extends Modele {
 						c.millesime, 
 						b.id,
 						b.nom, 
-						b.type, 
+						b.vino__type_id, 
 						b.image, 
 						b.code_saq, 
 						b.url_saq, 
@@ -52,9 +52,12 @@ class Bouteille extends Modele {
 						b.description,
 						t.type 
 						from vino__cellier c 
-						INNER JOIN vino__bouteille b ON c.id_bouteille = b.id
-						INNER JOIN vino__type t ON t.id = b.type
-						'; 
+						INNER JOIN vino__bouteille_has_vino__cellier h ON c.id = h.vino__cellier_id
+						INNER JOIN vino__bouteille b ON h.vino__bouteille_id = b.id
+						INNER JOIN vino__type t ON t.id = b.vino__type_id
+					'; 
+
+
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
 			if($res->num_rows)
